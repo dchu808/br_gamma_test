@@ -8,6 +8,7 @@ from matplotlib.colors import LogNorm
 import astropy.io
 from astropy.io import fits
 import pyfits as pf
+from matplotlib.backends.backend_pdf import PdfPages
 
 ##step 1 is read the .conf (config) file
 ##the .conf file is generated during the UCLA Galactic Center Group data analysis
@@ -41,6 +42,8 @@ def test(width = 5, start = 175, finish = 190):
     outputs = np.zeros((len(files_list),width,width))
     
     ##loop through all the files to run the calculation
+    ##plot them in a figure
+    fig = plt.figure(figsize = (10,16))
     for i in range(len(files_list)):
         data_cube, header = pf.getdata('test_data/'+files_list[i], header=True)
         noise = pf.getdata('test_data/'+files_list[i], ext=1)
@@ -57,11 +60,12 @@ def test(width = 5, start = 175, finish = 190):
             centers_array[i][1] - box_width:centers_array[i][1] + box_width + 1,
             start:finish+1]
             
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1,1,1)
+        ax1 = fig.add_subplot(4,3,i+1)
         cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower",interpolation="nearest")
-        plt.colorbar(cax)
-        plt.title(files_list[i])
+        # plt.colorbar(cax)
+        plt.title(files_list[i][10:15])
+        ##plot the file list but shorten it
+        ##shortname = np.core.defchararray.strip()
         plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
         plt.ylabel('Center X Pixel at %d'%centers_array[i][0])
         ##clarifying some tickmark labels, have center array be at 0
@@ -73,8 +77,7 @@ def test(width = 5, start = 175, finish = 190):
         #print np.sum(new_data_cube, axis=2)
         outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
-        plt.show()
-        
+            
     print outputs
     
     ##think about how to compare the different outputs
@@ -86,12 +89,16 @@ def test(width = 5, start = 175, finish = 190):
     print output_std
     
     ##plot the standard deviation
-    std_fig = plt.figure()
-    ax1 = std_fig.add_subplot(1,1,1)
+    # std_fig = plt.figure()
+    ax1 = fig.add_subplot(4,3,len(files_list)+1)
     cax = ax1.imshow(output_std, cmap="hot", origin="lower",interpolation="nearest")
     plt.colorbar(cax)
     plt.title('Standard Deviation')
-    plt.show()
+    
+    #plt.show()
+    pp = PdfPages('test_plots.pdf')
+    pp.savefig()
+    pp.close()
     
     ##residuals
     ##compare the residuals between each of the frames
