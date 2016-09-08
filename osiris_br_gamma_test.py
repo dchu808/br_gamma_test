@@ -57,23 +57,22 @@ def test(width = 5, start = 175, finish = 190):
             centers_array[i][1] - box_width:centers_array[i][1] + box_width + 1,
             start:finish+1]
             
-        # fig = plt.figure()
-        # ax1 = fig.add_subplot(1,1,1)
-        # ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
+        fig = plt.figure()
+        ax1 = fig.add_subplot(1,1,1)
+        cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
+        plt.colorbar(cax)
         plt.title(files_list[i])
-        plt.xlabel('Center Pixel at %d'%centers_array[i][0])
-        plt.ylabel('Center Pixel at %d'%centers_array[i][1])
+        plt.xlabel('Center Pixel at %d'%centers_array[i][1])
+        plt.ylabel('Center Pixel at %d'%centers_array[i][0])
         #print np.sum(new_data_cube, axis=2)
         outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
-        # plt.show()
+        plt.show()
         
     print outputs
     
     ##think about how to compare the different outputs
-    
-    ##residuals
-    ##compare the residuals between each of the frames
+
     
     ##standard deviation
     ##calculate the standard deviation along the summed spectral axis for all the files
@@ -87,4 +86,7 @@ def test(width = 5, start = 175, finish = 190):
     plt.colorbar(cax)
     plt.title('Standard Deviation')
     plt.show()
+    
+    ##residuals
+    ##compare the residuals between each of the frames
     
