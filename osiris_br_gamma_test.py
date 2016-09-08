@@ -67,6 +67,7 @@ def test(width = 5, start = 175, finish = 190):
         ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
         #norm=LogNorm()
         print np.sum(new_data_cube, axis=2)
+        # print np.sum(new_data_cube, axis=2).shape
         plt.show()
     
     
