@@ -62,8 +62,8 @@ def test(width = 5, start = 175, finish = 190):
         cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
         plt.colorbar(cax)
         plt.title(files_list[i])
-        plt.xlabel('Center Pixel at %d'%centers_array[i][1])
-        plt.ylabel('Center Pixel at %d'%centers_array[i][0])
+        plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
+        plt.ylabel('Center X Pixel at %d'%centers_array[i][0])
         #print np.sum(new_data_cube, axis=2)
         outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
