@@ -59,7 +59,7 @@ def test(width = 5, start = 175, finish = 190):
             
         fig = plt.figure()
         ax1 = fig.add_subplot(1,1,1)
-        cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
+        cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower",interpolation="nearest")
         plt.colorbar(cax)
         plt.title(files_list[i])
         plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
@@ -88,7 +88,7 @@ def test(width = 5, start = 175, finish = 190):
     ##plot the standard deviation
     std_fig = plt.figure()
     ax1 = std_fig.add_subplot(1,1,1)
-    cax = ax1.imshow(output_std, cmap="hot", origin="lower")
+    cax = ax1.imshow(output_std, cmap="hot", origin="lower",interpolation="nearest")
     plt.colorbar(cax)
     plt.title('Standard Deviation')
     plt.show()
