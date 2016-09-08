@@ -16,7 +16,7 @@ import pyfits as pf
 def test(width = 5, start = 175, finish = 190):
     ##width is size of box in pixel, centered around center pixels - make this an odd number
     ##start and finish represent the end points of the spectral channels to sample
-    ##ideally, this will be general and can take a .conf file (maybe? - depends on what we want to do)
+
     ##get list of file names from the .conf file
     files_list = np.genfromtxt('gas_130727_version2.conf', dtype=('S30'),delimiter=',',deletechars='',skip_footer=9)
     # print files_list
@@ -45,6 +45,9 @@ def test(width = 5, start = 175, finish = 190):
     ##make an array of the pixels, centered around the center pixel
     box_width = (width - 1)/2
     
+    ##create a matrix to store all the results from the frames
+    outputs = np.zeros((len(files_list),width,width))
+    
     ##loop through all the files to run the calculation
     for i in range(len(files_list)):
         data_cube, header = pf.getdata('test_data/'+files_list[i], header=True)
@@ -65,10 +68,23 @@ def test(width = 5, start = 175, finish = 190):
         fig = plt.figure()
         ax1 = fig.add_subplot(1,1,1)
         ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower")
-        #norm=LogNorm()
-        print np.sum(new_data_cube, axis=2)
+        plt.title(files_list[i])
+        plt.xlabel('Center Pixel at %d'%centers_array[i][0])
+        plt.ylabel('Center Pixel at %d'%centers_array[i][1])
+        #print np.sum(new_data_cube, axis=2)
+        outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
         plt.show()
+        
+    print outputs
+    
+    ##think about how to compare the different outputs
+    
+    ##residuals
+    ##compare the residuals between each of the frames
+    
+    ##standard deviation
+    
     
     
     # print data_cube
@@ -129,9 +145,9 @@ def test(width = 5, start = 175, finish = 190):
     # ax1.imshow(np.median(data_cube, axis=2), cmap="hot", norm=LogNorm(), origin="lower")
     # plt.show()
     
-    fig = plt.figure()
-    ax1 = fig.add_subplot(1,1,1)
-    ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", norm=LogNorm(), origin="lower")
-    print np.sum(new_data_cube, axis=2)
-    plt.show()
+    # fig = plt.figure()
+    # ax1 = fig.add_subplot(1,1,1)
+    # ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", norm=LogNorm(), origin="lower")
+    # print np.sum(new_data_cube, axis=2)
+    # plt.show()
 		
