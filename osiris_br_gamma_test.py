@@ -61,13 +61,14 @@ def test(width = 5, start = 175, finish = 190):
             start:finish+1]
             
         ax1 = fig.add_subplot(4,3,i+1)
-        cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower",interpolation="nearest")
-        # plt.colorbar(cax)
+        cax = ax1.imshow(np.sum(new_data_cube, axis=2), cmap="hot", origin="lower",interpolation="nearest",vmin=1.,vmax=2.1)
+        ##add in vmin, vmax
+        plt.colorbar(cax,fraction=0.046, pad=0.04)
         plt.title(files_list[i][10:15])
         ##plot the file list but shorten it
         ##shortname = np.core.defchararray.strip()
-        plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
-        plt.ylabel('Center X Pixel at %d'%centers_array[i][0])
+        # plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
+        # plt.ylabel('Center X Pixel at %d'%centers_array[i][0])
         ##clarifying some tickmark labels, have center array be at 0
         x = np.arange(width)
         labels = np.arange(-1*box_width,box_width+1,1)
@@ -77,7 +78,8 @@ def test(width = 5, start = 175, finish = 190):
         #print np.sum(new_data_cube, axis=2)
         outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
-            
+    
+    # plt.colorbar(cax)
     print outputs
     
     ##think about how to compare the different outputs
@@ -91,8 +93,8 @@ def test(width = 5, start = 175, finish = 190):
     ##plot the standard deviation
     # std_fig = plt.figure()
     ax1 = fig.add_subplot(4,3,len(files_list)+1)
-    cax = ax1.imshow(output_std, cmap="hot", origin="lower",interpolation="nearest")
-    plt.colorbar(cax)
+    st_cax = ax1.imshow(output_std, cmap="hot", origin="lower",interpolation="nearest")
+    plt.colorbar(st_cax,fraction=0.046, pad=0.04)
     plt.title('Standard Deviation')
     
     #plt.show()
