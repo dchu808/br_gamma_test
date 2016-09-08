@@ -14,7 +14,7 @@ import pyfits as pf
 ##it marks the center positions of object in the different data cubes
 
 def test(width = 5, start = 175, finish = 190):
-    ##width is size of box in pixel, centered around center pixels - make this an odd number
+    ##width is size of box in pixels, centered around center pixels - make this an odd number
     ##start and finish represent the end points of the spectral channels to sample
 
     ##get list of file names from the .conf file
@@ -64,6 +64,12 @@ def test(width = 5, start = 175, finish = 190):
         plt.title(files_list[i])
         plt.xlabel('Center Y Pixel at %d'%centers_array[i][1])
         plt.ylabel('Center X Pixel at %d'%centers_array[i][0])
+        ##clarifying some tickmark labels, have center array be at 0
+        x = np.arange(width)
+        labels = np.arange(-1*box_width,box_width+1,1)
+        plt.xticks(x,labels)
+        ##do the same for plot y-axis
+        plt.yticks(x,labels)
         #print np.sum(new_data_cube, axis=2)
         outputs[i] = np.sum(new_data_cube, axis=2)
         # print np.sum(new_data_cube, axis=2).shape
