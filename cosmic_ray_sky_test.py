@@ -20,7 +20,7 @@ def plots(file_name):
     # noise = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/old_cosmic_ray/'+file_name, ext=1)
     no_cr_quality = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/no_cosmic_ray/'+file_name, ext=2)
     
-    print no_cr_quality
+    # print no_cr_quality[10,10,10]
     
     ##old cosmic ray
     ##uses clean cosmic ray from develop branch
