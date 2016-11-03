@@ -39,3 +39,10 @@ def plots(file_name):
     cax = ax1.imshow(no_cr_data[:,:,10], cmap="hot", origin="lower",interpolation="nearest")
     plt.title(file_name)
     
+    ax2 = fig.add_subplot(2,3,2)
+    cax = ax2.imshow(old_cr_data[:,:,10], cmap="hot", origin="lower",interpolation="nearest")
+    
+    ax3 = fig.add_subplot(2,3,3)
+    cax = ax3.imshow(new_cr_data[:,:,10], cmap="hot", origin="lower",interpolation="nearest")
+    
+    plt.show()
