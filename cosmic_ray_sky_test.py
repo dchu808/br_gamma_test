@@ -25,12 +25,12 @@ def plots(file_name):
     ##old cosmic ray
     ##uses clean cosmic ray from develop branch
     old_cr_data, header = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/old_cosmic_ray/'+file_name, header=True)
-    old_cr_quality, header = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/old_cosmic_ray/'+file_name, ext=2)
+    old_cr_quality = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/old_cosmic_ray/'+file_name, ext=2)
     
     ##new cosmic ray
     ##uses clean cosmic ray from develop branch
     new_cr_data, header = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/new_cosmic_ray/'+file_name, header=True)
-    new_cr_quality, header = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/new_cosmic_ray/'+file_name, ext=2)
+    new_cr_quality = pf.getdata('/u/devinchu/OSIRIS/cosmic_ray_sky_test/cr_skies/new_cosmic_ray/'+file_name, ext=2)
     
     ##plot figure
     fig = plt.figure(figsize = (10,16))
